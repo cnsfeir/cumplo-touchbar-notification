@@ -17,12 +17,12 @@ class CumploScraper():
     def free_driver(self):
         self.driver.quit() if self.driver else None
 
-    def wait_untilall_presences_disappears(self, element: str, time: int=10):
+    def wait_until_all_presences_disappears(self, element: str, time: int=10):
         WebDriverWait(self.driver, time).until_not(ec.presence_of_all_elements_located((By.XPATH, element)))
     
     def wait_loading_animation(self):
         try:
-            self.wait_untilall_presences_disappears("//*[contains(@class, 'MuiCircularProgress')]")
+            self.wait_until_all_presences_disappears("//*[contains(@class, 'MuiCircularProgress')]")
         except TimeoutException:
             return False
         else:
