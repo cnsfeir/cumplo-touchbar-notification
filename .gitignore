@@ -240,16 +240,7 @@ $RECYCLE.BIN/
 # Build folder
 
 */build/*
-
-/.aws*
-/.layers*
-/events/event*
-/hasher
-/driver
 /webdriver
-/iris
-/aws_utils
-/tests/conftest.py
-/tests/unit/scrapers/new_tests.py
+ghostdriver.log
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
