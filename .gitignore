@@ -253,6 +253,3 @@ $RECYCLE.BIN/
 /tests/unit/scrapers/new_tests.py
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
-
-# Shell Script
-run.sh
