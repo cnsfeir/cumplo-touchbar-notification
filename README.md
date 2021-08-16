@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://user-images.githubusercontent.com/58790635/129502180-d9af247a-68d5-4b96-9dd8-e6d4eb0c31f4.png" width="450"/>
+<img src="https://user-images.githubusercontent.com/58790635/129502180-d9af247a-68d5-4b96-9dd8-e6d4eb0c31f4.png" width="350"/>
 
 # cumplo-touchbar-notification
 Touch-bar notification badge for available Cumplo investment opportunities.
