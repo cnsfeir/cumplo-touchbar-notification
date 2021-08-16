@@ -1,6 +1,6 @@
 tell application "BetterTouchTool" to set dndEnabled to get_number_variable "SystemDoNotDisturbState"
 
-if dndEnabled is 0 and application "Brave" is running then
+if dndEnabled is 0 then
 	set oportunitiesCount to do shell script "zsh /path/to/run.sh" # Fill path to run.sh
 	if oportunitiesCount > 0 then
 		tell application "BetterTouchTool"
