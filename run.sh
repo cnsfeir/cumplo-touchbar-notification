@@ -1,4 +1,4 @@
-cd /Users/cnsfeir/Documents/Code/BTT/cumplo-investment-oportunities
+cd /path/to/cumplo-investment-oportunities #FILLME
 source env/bin/activate
 python3 main.py
 deactivate
