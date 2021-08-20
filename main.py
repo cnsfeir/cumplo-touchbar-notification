@@ -4,7 +4,5 @@ if __name__ == "__main__":
     cumplo_scraper = CumploScraper()
     try:
         print(cumplo_scraper.investment_oportunities_count())
-    except Exception:
-        cumplo_scraper.free_driver()
-    else:
+    finally:
         cumplo_scraper.free_driver()
