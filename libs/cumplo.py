@@ -29,7 +29,7 @@ class CumploScraper():
             return True
 
     def get_percentage(self, element) -> int:
-        return int(x.get_attribute('innerText').replace('%', ''))
+        return int(element.get_attribute('innerText').replace('%', ''))
 
     def investment_oportunities_count(self) -> int:
         oportunities_count = 0
