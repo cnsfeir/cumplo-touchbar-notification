@@ -1,0 +1,115 @@
+repos:
+
+# BASIC PRE-COMMIT HOOKS
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.2.0
+  hooks:
+  - id: trailing-whitespace # Trims trailing whitespace
+    name: Trailing Whitespaces
+  - id: end-of-file-fixer # Ensures that a file is either empty or ends with one newline
+    name: End-of-line Fixer
+  - id: requirements-txt-fixer # Sorts entries in requirements.txt
+    name: Requirements Fixer
+
+# SINTAX UPGRADE
+- repo: https://github.com/asottile/pyupgrade
+  rev: v2.32.1
+  hooks:
+  - id: pyupgrade # Automatically upgrade syntax for newer versions
+    name: Sintax Upgrade
+
+# TYPE ANOTATIONS
+- repo: https://github.com/pre-commit/pygrep-hooks
+  rev: v1.9.0
+  hooks:
+  - id: python-use-type-annotations # Enforce that Python 3.6+ type annotations are used instead of type comments
+    name: Type Annotations Standard
+
+# TYPE HINTS
+- repo: https://github.com/sondrelg/pep585-upgrade
+  rev: v1.0.1
+  hooks:
+  - id: upgrade-type-hints # Upgrades type hints to new types introduced in PEP 585 (https://peps.python.org/pep-0585/)
+    # args: [--futures=true]   # For older Python (< 3.9) versions compatibility
+    name: Type Hints Upgrade
+
+# MYPY
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v0.950
+  hooks:
+  - id: mypy # Runs MyPy static type checker
+    args: [--config-file, pyproject.toml]
+    name: MyPy Checker
+
+# ABSOLUTE IMPORTS
+- repo: https://github.com/MarcoGorelli/absolufy-imports
+  rev: v0.3.1
+  hooks:
+  - id: absolufy-imports # Converts relative imports to absolute
+    name: Absolufy Imports
+
+# UNUSED IMPORTS
+- repo: https://github.com/hadialqattan/pycln
+  rev: v1.3.2
+  hooks:
+  - id: pycln # Finds and remove unused import statements
+    args: [--config, pyproject.toml]
+    name: Unsed Imports
+
+# ISORT
+- repo: https://github.com/pycqa/isort
+  rev: 5.10.1
+  hooks:
+  - id: isort # iSort your imports, so you don't have to
+    args: [--settings, pyproject.toml]
+    name: iSort
+
+# BLACK FORMATTER
+- repo: https://github.com/psf/black
+  rev: 22.3.0
+  hooks:
+  - id: black # Runs Black: The uncompromising Python code formatter
+    name: Black Formatter
+
+# TRAILING COMMAS
+- repo: https://github.com/asottile/add-trailing-comma
+  rev: v2.2.3
+  hooks:
+  - id: add-trailing-comma # Automatically add trailing commas to calls and literals
+    name: Trailing Commas
+
+# PYLINT
+- repo: https://github.com/PyCQA/pylint
+  rev: v2.14.3
+  hooks:
+  - id: pylint # Runs Pylint: checks for errors, enforces a coding standard, looks for code smells, and makes refactor suggestions.
+    args: [--rcfile, pyproject.toml]
+    name: Pylint
+
+# FLAKE8
+- repo: https://github.com/PyCQA/flake8
+  rev: 4.0.1
+  hooks:
+  - id: flake8 # Runs Flake8: a command-line utility for enforcing style consistency across Python projects
+    args: [--config, pyproject.toml]
+    name: Flake8
+
+# ANTI-CRLF
+- repo: https://github.com/Lucas-C/pre-commit-hooks
+  rev: v1.1.14
+  hooks:
+  - id: remove-crlf # Replace CRLF end-lines by LF ones before committing
+    name: Remove CRLF
+  - id: forbid-crlf # Forbid files containing CRLF end-lines to be committed
+    name: Forbid CRLF
+
+# CONFIG FILES FORMATTING
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.3.0
+  hooks:
+  - id: pretty-format-toml # Sets a standard for formatting TOML files.
+    args: [--autofix]
+    name: Format TOML
+  - id: pretty-format-yaml # Sets a standard for formatting YAML files.
+    args: [--autofix, --indent, '2']
+    name: Format YAML

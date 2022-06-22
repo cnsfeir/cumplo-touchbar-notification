@@ -1,0 +1,98 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[flake8]
+max-line-length = 88
+extend-ignore = 'E203'
+max-complexity = 10
+exclude = '''
+/(
+    \.git
+  | __pycache__
+  | docs/source/conf.py
+  | old
+  | build
+  | dist
+)/
+'''
+
+[tool.black]
+skip-string-normalization = true
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+length_sort = true
+
+[tool.mypy]
+python_version = "3.10"
+files = "*.py"
+python_executable = ".venv/bin/python"
+disallow_untyped_defs = true
+disallow_untyped_calls = false
+no_implicit_optional = true
+no_strict_optional = false
+ignore_missing_imports = false
+pretty = true
+
+[tool.poetry]
+name = "cumplo-investment-oportunities"
+version = "0.1.0"
+description = "Python project template"
+authors = ["cnsfeir <cnsfeir@uc.cl>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^0.20.0"
+selenium = "^4.2.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.19.0"
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+
+[tool.pycln]
+all = true
+expand_stars = true
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.pylint]
+max-line-length = 88
+good-names = ["i", "x", "y"]
+py-version = "3.10"
+disable = [
+  "import-error",
+  "missing-docstring",
+  "redefined-outer-name",
+  "too-few-public-methods",
+  "unsubscriptable-object",
+  "pointless-string-statement",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
