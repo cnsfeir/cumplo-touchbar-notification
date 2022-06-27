@@ -28,7 +28,7 @@ I started using [BetterTouchTool](https://folivora.ai/) (BTT) for customizing my
   <img src="https://user-images.githubusercontent.com/58790635/175826321-acb8b6ca-4b01-4765-8682-b6c0bf74856b.png"/>
 </div>
 
-Once you can execute code, the sky is the limit. So I built **a scraper that searches Cumplo website for "promising" investment opportunities (based on your preferences) and displays in the badge how many did it find**. Also, you can press the badge and it'll open Cumplo's webpage so you can invest as soon as see the notification.
+Once you can execute code, the sky is the limit. So I built **a scraper that searches Cumplo website for "promising" investment opportunities (based on your preferences) and displays in the badge how many did it find**. Also, you can press the badge and it'll open Cumplo's webpage so you can invest as soon as you see the notification.
  
  <div align="center">
   <img src="https://user-images.githubusercontent.com/58790635/175827375-eda33994-7489-41bc-8fc1-eab01ebcdd30.png" width="400"/>
