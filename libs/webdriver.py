@@ -1,29 +1,42 @@
+import logging
 import os
-from contextlib import contextmanager
 from collections.abc import Iterator
+from contextlib import contextmanager
 
-from dotenv import load_dotenv
-from selenium.webdriver import Chrome, ChromeOptions
-
-load_dotenv()
-DRIVER_LOCATION = os.environ.get('DRIVER_LOCATION', '')
-BINARY_LOCATION = os.environ.get('BINARY_LOCATION', '')
+from selenium import webdriver
+from selenium.webdriver import ChromeOptions
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.utils import ChromeType
 
 
 class DriverFactory:
-    @classmethod
+    def __init__(self, binary_location: str) -> None:
+        self.binary_location: str = binary_location
+        self._silence_driver_manager()
+
     @contextmanager
-    def get_driver(cls) -> Iterator:
-        options = cls._get_options()
+    def get_driver(self) -> Iterator:
+        options = self._get_options()
+        service = self._get_service()
         try:
-            driver = Chrome(executable_path=DRIVER_LOCATION, options=options)
+            driver = webdriver.Chrome(service=service, options=options)
             yield driver
         finally:
             driver.quit()
 
-    @staticmethod
-    def _get_options() -> ChromeOptions:
+    def _get_options(self) -> ChromeOptions:
         options = ChromeOptions()
         options.add_argument('--headless')
-        options.binary_location = BINARY_LOCATION
+        options.binary_location = self.binary_location
         return options
+
+    @staticmethod
+    def _get_service() -> Service:
+        manager = ChromeDriverManager(chrome_type=ChromeType.BRAVE)
+        return Service(manager.install())
+
+    @staticmethod
+    def _silence_driver_manager() -> None:
+        logging.getLogger('WDM').setLevel(logging.NOTSET)
+        os.environ['WDM_LOG'] = "false"

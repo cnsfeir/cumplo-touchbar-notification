@@ -1,19 +1,20 @@
 from collections.abc import Iterator
 
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
-from libs.utils import get_percentage
 from libs.params import (
-    TIR_XPATH,
-    GRADES_XPATH,
-    TIR_THRESHOLD,
-    PROGRESS_XPATH,
-    GRADE_THRESHOLD,
     CUMPLO_LOADING_SELECTOR,
+    GRADE_THRESHOLD,
+    GRADES_XPATH,
     INVESTMENT_OPORTUNITIES_URL,
+    PROGRESS_XPATH,
+    TIR_THRESHOLD,
+    TIR_XPATH,
 )
 from libs.scraper import Scraper
+from libs.utils import get_percentage
 
 Oportunity = tuple[WebElement, WebElement, WebElement]
 
@@ -28,9 +29,9 @@ class CumploScraper(Scraper):
             return True
 
     def _get_oportunities(self) -> Iterator[Oportunity]:
-        tirs = self.driver.find_elements_by_xpath(TIR_XPATH)
-        grades = self.driver.find_elements_by_xpath(GRADES_XPATH)
-        progress = self.driver.find_elements_by_xpath(PROGRESS_XPATH)
+        tirs = self.driver.find_elements(By.XPATH, TIR_XPATH)
+        grades = self.driver.find_elements(By.XPATH, GRADES_XPATH)
+        progress = self.driver.find_elements(By.XPATH, PROGRESS_XPATH)
         return zip(tirs, grades, progress)
 
     @staticmethod
@@ -38,10 +39,10 @@ class CumploScraper(Scraper):
         return get_percentage(progress) >= 100
 
     @staticmethod
-    def _is_interesting(tir: WebElement, grade: WebElement) -> bool:
-        interesting_tir: bool = get_percentage(tir) >= TIR_THRESHOLD
-        interesting_grade: bool = get_percentage(grade) >= GRADE_THRESHOLD
-        return interesting_tir and interesting_grade
+    def _is_promising(tir: WebElement, grade: WebElement) -> bool:
+        promising_tir: bool = get_percentage(tir) >= TIR_THRESHOLD
+        promising_grade: bool = get_percentage(grade) >= GRADE_THRESHOLD
+        return promising_tir and promising_grade
 
     def investment_oportunities_count(self) -> int:
         self.driver.get(INVESTMENT_OPORTUNITIES_URL)
@@ -50,6 +51,6 @@ class CumploScraper(Scraper):
             for tir, grade, progress in self._get_oportunities():
                 if self._is_complete(progress):
                     continue
-                if self._is_interesting(tir, grade):
+                if self._is_promising(tir, grade):
                     oportunities_count += 1
         return oportunities_count

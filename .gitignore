@@ -243,4 +243,7 @@ $RECYCLE.BIN/
 /webdriver
 ghostdriver.log
 
+# Webdriver Manager
+.wdm
+
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
