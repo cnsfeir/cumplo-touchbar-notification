@@ -1,4 +1,3 @@
-import logging
 import os
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -11,12 +10,14 @@ from webdriver_manager.core.utils import ChromeType
 
 
 class DriverFactory:
-    def __init__(self, binary_location: str) -> None:
-        self.binary_location: str = binary_location
-        self._silence_driver_manager()
+    def __post_init__(self) -> None:
+        os.environ["WDM_LOG"] = "false"
 
     @contextmanager
     def get_driver(self) -> Iterator:
+        """
+        Returns a context manager that yields a Chrome driver.
+        """
         options = self._get_options()
         service = self._get_service()
         try:
@@ -27,16 +28,10 @@ class DriverFactory:
 
     def _get_options(self) -> ChromeOptions:
         options = ChromeOptions()
-        options.add_argument('--headless')
-        options.binary_location = self.binary_location
+        options.add_argument("--headless")
         return options
 
     @staticmethod
     def _get_service() -> Service:
         manager = ChromeDriverManager(chrome_type=ChromeType.BRAVE)
         return Service(manager.install())
-
-    @staticmethod
-    def _silence_driver_manager() -> None:
-        logging.getLogger('WDM').setLevel(logging.NOTSET)
-        os.environ['WDM_LOG'] = "false"

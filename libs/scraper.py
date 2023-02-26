@@ -11,6 +11,7 @@ class Scraper(ABC):
         self.driver: WebDriver = driver
 
     def _wait_until_all_presences_disappear(self, element: str, time: int = 10) -> None:
-        WebDriverWait(self.driver, time).until_not(
-            ec.presence_of_all_elements_located((By.XPATH, element)),
-        )
+        """
+        Waits for all elements to disappear.
+        """
+        WebDriverWait(self.driver, time).until_not(ec.presence_of_all_elements_located((By.XPATH, element)))
